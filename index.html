@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>Unicode Range Interchange</title>
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+    :link,
+    :visited,
+    input,
+    textarea {
+      color: inherit;
+    }
+    html {
+      background: #111;
+      color: #ddd;
+      font-family: Monaco, monospace;
+    }
+    html, body {
+      height: 100%;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .uri-io {
+      flex-grow: 1;
+      flex-basis: 10em;
+    }
+    .uri-io-text {
+      background: #222;
+      border: 1px solid;
+      font-size: 1.5em;
+      font-family: inherit;
+      min-height: 30vh;
+      width: 100%;
+      padding: .25em;
+    }
+    .uri-io-text[readonly] {
+      background: transparent;
+    }
+    .uri-io-size {
+      display: flex;
+      flex-basis: 100%;
+      margin-bottom: 1em;
+    }
+    .uri-io-size > * {
+      padding-left: 4px;
+    }
+    .uri-operations {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 1rem;
+      white-space: nowrap;
+    }
+    .uri-operations--eq {
+      font-size: 3em;
+      align-items: center;
+    }
+    </style>
+    <script type="module" defer src="js/uri.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Unicode Range Interchange</h1>
+    </header>
+    <main>
+      <p>Do math on <code>unicode-range</code> values for web fonts. Created by <a href="https://www.zachleat.com/">zachleat</a>. Hard work by <a href="https://www.npmjs.com/package/characterset">bramstein</a>.</p>
+      <form>
+        <div class="uri-io">
+          <textarea class="uri-io-text" id="from-a">U+20-30</textarea>
+          <span class="uri-io-size">Size: <span id="from-a-size"></span></span>
+        </div>
+        <div class="uri-operations">
+          <label><input type="radio" name="operations" value="union" checked> Union</label>
+          <label><input type="radio" name="operations" value="intersect"> Intersect</label>
+          <label><input type="radio" name="operations" value="equals"> Equals</label>
+          <label><input type="radio" name="operations" value="difference"> Difference</label>
+          <label><input type="radio" name="operations" value="subset"> Subset</label>
+        </div>
+        <div class="uri-io">
+          <textarea class="uri-io-text" id="from-b">ABCDEFG!</textarea>
+          <span class="uri-io-size">Size: <span id="from-b-size"></span></span>
+        </div>
+        <div class="uri-operations uri-operations--eq">=</div>
+        <div class="uri-io">
+          <textarea class="uri-io-text" id="to" readonly></textarea>
+          <span class="uri-io-size">Size: <span id="to-size"></span></span>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
