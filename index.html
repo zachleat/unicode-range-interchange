@@ -43,12 +43,16 @@
     .uri-io-text[readonly] {
       background: transparent;
     }
-    .uri-io-size {
+    .uri-io-meta {
       display: flex;
       flex-basis: 100%;
       margin-bottom: 1em;
     }
-    .uri-io-size > * {
+    .uri-io-meta-chars {
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .uri-io-meta > * {
       padding-left: 4px;
     }
     .uri-operations {
@@ -76,7 +80,8 @@
       <form>
         <div class="uri-io">
           <textarea class="uri-io-text" id="from-a">U+20-30</textarea>
-          <span class="uri-io-size">Size: <span id="from-a-size"></span></span>
+          <div class="uri-io-meta">Size: <span id="from-a-size"></span></div>
+          <pre class="uri-io-meta uri-io-meta-chars" id="from-a-chars"></pre>
         </div>
         <div class="uri-operations">
           <label><input type="radio" name="operations" value="union" checked> Union</label>
@@ -87,12 +92,14 @@
         </div>
         <div class="uri-io">
           <textarea class="uri-io-text" id="from-b">ABCDEFG!</textarea>
-          <span class="uri-io-size">Size: <span id="from-b-size"></span></span>
+          <div class="uri-io-meta">Size: <span id="from-b-size"></span></div>
+          <pre class="uri-io-meta uri-io-meta-chars" id="from-b-chars"></pre>
         </div>
         <div class="uri-operations uri-operations--eq">=</div>
         <div class="uri-io">
           <textarea class="uri-io-text" id="to" readonly></textarea>
-          <span class="uri-io-size">Size: <span id="to-size"></span></span>
+          <div class="uri-io-meta">Size: <span id="to-size"></span></div>
+          <pre class="uri-io-meta uri-io-meta-chars" id="to-chars"></pre>
         </div>
       </form>
     </main>

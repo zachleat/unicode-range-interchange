@@ -5,18 +5,28 @@ class URI {
     this.fromLeft = document.getElementById("from-a");
     this.fromRight = document.getElementById("from-b");
     this.to = document.getElementById("to");
-    this.ops = document.querySelectorAll("input[name=operations]")
+    this.ops = document.querySelectorAll("input[name=operations]");
 
     this.size = {
       fromLeft: document.getElementById("from-a-size"),
       fromRight: document.getElementById("from-b-size"),
       to: document.getElementById("to-size"),
+    };
+
+    this.chars = {
+      fromLeft: document.getElementById("from-a-chars"),
+      fromRight: document.getElementById("from-b-chars"),
+      to: document.getElementById("to-chars"),
     }
   }
 
   getOperationName() {
     let checked = Array.from(this.ops).filter(entry => entry.checked);
     return checked[0].value;
+  }
+
+  charsetToString(charset) {
+    return charset.toArray().map(codePoint => String.fromCodePoint(codePoint)).join("");
   }
 
   doMath() {
@@ -33,12 +43,16 @@ class URI {
       charset2 = new CharacterSet(rightVal);
     }
 
+    this.chars.fromLeft.innerText = this.charsetToString(charset1);
+    this.chars.fromRight.innerText = this.charsetToString(charset2);
+
     let opName = this.getOperationName();
     let output = charset1[opName](charset2);
 
     if(output.toHexRangeString) {
       this.to.value = output.toHexRangeString();
       this.size.to.innerText = output.getSize();
+      this.chars.to.innerText = this.charsetToString(output);
     } else {
       this.to.value = output;
       this.size.to.innerText = "N/A";
