@@ -6,6 +6,7 @@ class URI {
     this.fromRight = document.getElementById("from-b");
     this.to = document.getElementById("to");
     this.ops = document.querySelectorAll("input[name=operations]");
+    this.buttons = document.querySelectorAll("button[data-target]");
 
     this.size = {
       fromLeft: document.getElementById("from-a-size"),
@@ -27,6 +28,24 @@ class URI {
 
   charsetToString(charset) {
     return charset.toArray().map(codePoint => String.fromCodePoint(codePoint)).join("");
+  }
+
+  overrideValue(event) {
+    event.preventDefault();
+    let target = event.target;
+    let targetAttr = target.getAttribute("data-target");
+
+    if(targetAttr === "right") {
+      this.fromRight.value = target.getAttribute("data-unicode-range");
+    } else if(targetAttr === "left") {
+      this.fromLeft.value = target.getAttribute("data-unicode-range");
+    } else if(targetAttr === "swap") {
+      let leftVal = this.fromLeft.value;
+      let rightVal = this.fromRight.value;
+      this.fromLeft.value = rightVal;
+      this.fromRight.value = leftVal;
+    }
+    this.doMath();
   }
 
   doMath() {
@@ -68,6 +87,9 @@ class URI {
 
     for(let op of this.ops) {
       op.addEventListener("change", this.doMath.bind(this));
+    }
+    for(let btn of this.buttons) {
+      btn.addEventListener("click", this.overrideValue.bind(this));
     }
   }
 }
